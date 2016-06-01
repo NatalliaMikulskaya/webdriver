@@ -23,21 +23,11 @@ public class MessagePage extends Page {
 	
 	
 	public MessagePage(WebDriver currentDriver){
-		
+		super(currentDriver);
 		driver = currentDriver;
-		
-		PageFactory.initElements(driver, this);
 	}
 	
 	public void clickButtonSpam(){
-		
-		//System.out.println("Spam button displayed: "+buttonSpam.isDisplayed());
-		//System.out.println("Spam button enabled: "+buttonSpam.isEnabled());
-		//System.out.println(": "+buttonSpam.getAttribute("aria-label").toString());
-		//Actions ac = new Actions(driver);
-		//ac.moveToElement(buttonSpam);
-		//ac.click(buttonSpam);
-		//((JavascriptExecutor) driver).executeScript("arguments[0].click()",buttonSpam);
 		
 		(new WebDriverWait(driver, 30)).
 			until(ExpectedConditions.

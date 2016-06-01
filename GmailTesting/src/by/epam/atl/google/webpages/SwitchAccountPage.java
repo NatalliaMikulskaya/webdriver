@@ -5,7 +5,6 @@ import java.util.List;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
 
 public class SwitchAccountPage extends Page{
 	
@@ -21,9 +20,9 @@ public class SwitchAccountPage extends Page{
 	//----- Constructor
 	public SwitchAccountPage(WebDriver currentDriver){
 		
+		super(currentDriver);
 		driver = currentDriver;
-		
-		PageFactory.initElements(driver, this);
+
 	}
 	
 	@Override
@@ -33,28 +32,37 @@ public class SwitchAccountPage extends Page{
 	
 	public Page chooseAccount(String accountName){
 	
-		if (accounts.size() > 0) {
-			WebElement rightAccount = findAccount(accountName);
-			
-			if (rightAccount != null) {
-				rightAccount.click();
-				return new PageWithPassword(driver);
-			}
-		} 
-		
+	
+		highlight(driver, linkAddAccount);
 		linkAddAccount.click();
 
-		return new PageWithFilledLogin(driver);
+		return new PageWithEmptyLogin(driver);
 
+	}
+	
+	private void trash(){
+		/*	if (accounts.size() > 0) {
+		WebElement rightAccount = findAccount(accountName);
+		System.out.println("SwitchAccountPage.findAccount: found account - "+ rightAccount);
+		if (rightAccount != null) {
+			highlight(driver, rightAccount);
+			rightAccount.click();
+			return new PageWithPassword(driver);
+		}
+	} */
+	
 	}
 	
 
 	private WebElement findAccount(String accName){
 		
+		System.out.println("SwitchAccountPage.findAccount: accName - "+ accName);
 		for (WebElement nextAccount : accounts){
 			
-			String nextAcc = nextAccount.getText();
-
+			String nextAcc = nextAccount.getAttribute("value");
+			System.out.println("SwitchAccountPage.findAccount: account on page - "+ nextAcc);
+			
+			System.out.println("SwitchAccountPage.findAccount: nextAcc.equals(accName) - "+ nextAcc.equals(accName));
 			if (nextAcc.equals(accName)){
 				return nextAccount;
 			}

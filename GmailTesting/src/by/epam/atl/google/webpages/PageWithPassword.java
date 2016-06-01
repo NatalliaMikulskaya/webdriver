@@ -3,7 +3,6 @@ package by.epam.atl.google.webpages;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
 
 public class PageWithPassword extends Page{
 	
@@ -27,9 +26,8 @@ public class PageWithPassword extends Page{
 	// --- Constructor
 	public PageWithPassword(WebDriver driver){
 		
+		super(driver);
 		this.driver = driver;
-		
-		PageFactory.initElements(driver,this);
 	}
 	
 	
@@ -60,6 +58,8 @@ public class PageWithPassword extends Page{
 	}
 	
 	public void clickLinkForSigningForDifferentAccount(){
+		
+		highlight(driver, linkSignByDifferentAccount);
 		
 		linkSignByDifferentAccount.click();
 	}

@@ -3,12 +3,9 @@ package by.epam.atl.google.webpages;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
 
-public class PageWithEmptyLogin {
+public class PageWithEmptyLogin extends Page{
 	
-	private WebDriver driver;
-
 	//Locators
 	@FindBy (name = "Email")
 	private WebElement loginField;
@@ -20,19 +17,26 @@ public class PageWithEmptyLogin {
 	private WebElement centralForm;
 	
 	public PageWithEmptyLogin(WebDriver wbDriver){
-		driver = wbDriver;
 		
-		PageFactory.initElements(driver, this);
+		super(wbDriver);
+		
 	}
 	
 	public boolean isPageOpened(){
 		return loginField.isDisplayed();
 	}
 	
+	
 	public void enterEmail(String email){
 		
 		loginField.sendKeys(email);
 		nextButton.click();
 		
+	}
+	
+	@Override
+	public boolean isPageForLoginEnter(){
+		
+		return loginField.isDisplayed();
 	}
 }

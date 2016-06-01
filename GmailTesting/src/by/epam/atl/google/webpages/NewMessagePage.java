@@ -3,9 +3,8 @@ package by.epam.atl.google.webpages;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
 
-public class NewMessagePage {
+public class NewMessagePage extends Page{
 	
 	private WebDriver driver;
 	
@@ -24,9 +23,9 @@ public class NewMessagePage {
 	
 	public NewMessagePage(WebDriver currentDriver){
 		
+		super(currentDriver);
 		driver = currentDriver;
 		
-		PageFactory.initElements(driver, this);
 	}
 	
 	public void writeNewMessageAndSend(String forWhom, String messageTopic, String messageText){

@@ -3,7 +3,7 @@
 <suite name="TestNG"  verbose="1" >
    <test name="Gmailtest">
     <classes>
-      <class name= "by.epam.atl.google.tests.LettersFromUser1ToUser2MarkedAsSpam"/>
+      <class name= "by.epam.atl.google.tests.GMailTests"/>
     </classes>
   </test>
 </suite>

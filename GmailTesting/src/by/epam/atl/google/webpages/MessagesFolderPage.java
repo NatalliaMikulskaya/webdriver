@@ -6,7 +6,10 @@ import org.openqa.selenium.WebElement;
 
 public abstract class MessagesFolderPage extends Page{
 
-		
+	public 	MessagesFolderPage(WebDriver currentDriver){
+		super(currentDriver);
+	}
+	
 	public final boolean isExistsMessageFromSender(WebDriver driver, String messageSenderName){
 		
 		WebElement messageSender = driver.findElement(By.xpath("//span[@email="+messageSenderName+"]"));
@@ -39,11 +42,36 @@ public abstract class MessagesFolderPage extends Page{
 		return false;
 	}
 	
+	public final boolean isLetterReceivedWithPartialTopicAndInInbox(WebDriver driver, String fromUser, String messageTopic){
+
+		WebElement foundedMessage = lookForMessageFromSenderWithPartialTopic(driver, fromUser, messageTopic);
+		if (foundedMessage != null){
+
+			return true;
+		}
+		
+		return false;
+	}
+	
 	
 	public final WebElement lookForMessageFromSenderWithTopic(WebDriver driver, String messageSenderName, String messageTopic){
 		
 		String strForSearchingMessage = "//tr[td[6]/div/div/div/span[1][.='"+messageTopic+
 				"'] and  td[4]/div[2]/span[contains(@email,'"+messageSenderName+"')]]";
+		
+		WebElement message = driver.findElement(By.xpath(strForSearchingMessage));
+		
+		if (message != null) {
+			return message;
+		}
+		
+		return null;
+	}
+	
+	public final WebElement lookForMessageFromSenderWithPartialTopic(WebDriver driver, String messageSenderName, String messageTopic){
+		
+		String strForSearchingMessage = "//tr[td[6]/div/div/div/span[1]/b[contains(text(),'"+messageTopic+
+				"')] and  td[4]/div[2]/span[contains(@email,'"+messageSenderName+"')]]";
 		
 		WebElement message = driver.findElement(By.xpath(strForSearchingMessage));
 		

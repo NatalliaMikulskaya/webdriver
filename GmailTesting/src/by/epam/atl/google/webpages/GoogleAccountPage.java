@@ -14,14 +14,13 @@ public class GoogleAccountPage extends Page {
 	
 	public GoogleAccountPage(WebDriver currentDriver){
 		
+		super(currentDriver);
 		driver = currentDriver;
-		
-		PageFactory.initElements(driver, this);
 	}
 
-	public void clickGmailLink() throws InterruptedException{
+	public void clickGmailLink() {
 		
-		//highlight(driver, gmailLink);
+		highlight(driver, gmailLink);
 		gmailLink.click();
 	}
 	

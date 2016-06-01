@@ -3,10 +3,16 @@ package by.epam.atl.google.webpages;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.PageFactory;
+//import org.openqa.selenium.support.ui.WebDriverWait;
 
 public abstract class Page {
 
+	public Page(WebDriver currentDriver){
 		
+		PageFactory.initElements(currentDriver, this);
+	}	
+	
 	public boolean isHomePage(){
 		return false;
 	}
@@ -43,14 +49,14 @@ public abstract class Page {
 		return false;
 	}
 	
-	public void highlight(WebDriver driver,WebElement element) throws InterruptedException{
+	public void highlight(WebDriver driver,WebElement element){
 		  //Creating JavaScriptExecuter Interface
 		   JavascriptExecutor js = (JavascriptExecutor)driver;
 		   for (int iCnt = 0; iCnt < 3; iCnt++) {
 		      //Execute javascript
-		         js.executeScript("arguments[0].style.border='4px groove green'", element);
-		         Thread.sleep(1000);
-		         js.executeScript("arguments[0].style.border=''", element);
+		         js.executeScript("arguments[0].style.backgroundColor='red'", element);
+		        // wait.withTimeout(3, TimeUnit.SECONDS);
+		         //js.executeScript("arguments[0].style.backgroundColor='initial'", element);
 		   }
 		 }
 }
