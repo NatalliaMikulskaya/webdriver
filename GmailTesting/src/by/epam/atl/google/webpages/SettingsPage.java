@@ -1,5 +1,7 @@
 package by.epam.atl.google.webpages;
 
+import java.util.List;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -24,7 +26,7 @@ public class SettingsPage extends Page {
 	private WebElement buttonNext;
 	
 	@FindBy (xpath = "//button[@guidedhelpid='save_changes_button']")
-	private WebElement buttonSaveChanges; 
+	private List<WebElement> buttonSaveChanges; 
 	
 	@FindBy (xpath = "//button[@name='ok']")
 	private WebElement buttonOKatConfirmationPopup;
@@ -73,11 +75,18 @@ public class SettingsPage extends Page {
 	
 	public void clickButtonSaveChanges(){
 		
-		if (buttonSaveChanges.isEnabled()){
-			
-			highlight(driver, buttonSaveChanges);
-			buttonSaveChanges.click();
-			
+		for (WebElement button : buttonSaveChanges){
+			if (button.isDisplayed() &  button.isEnabled()){
+
+				highlight(driver, button);
+				Actions act = new Actions(driver);
+
+				act.click(button).build().perform();
+
+				return;
+				//buttonSaveChanges.click();
+
+			}
 		}
 		
 	}
@@ -106,7 +115,7 @@ public class SettingsPage extends Page {
 		
 		Actions act = new Actions(driver);
 		
-		act.click(radioBox).release().build().perform();
+		act.click(radioBox).click().build().perform();
 		
 	}
 }

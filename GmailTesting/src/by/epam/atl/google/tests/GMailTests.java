@@ -32,6 +32,12 @@ public class GMailTests {
 	private final String text1 = "This is a message for test1. It is raining.";
 	private final String topic2 = "letter should appears in spam";
 	private final String text2 = "This is a message for spam. It is sun.";
+	private final String topic3 = "letter with attachments";
+	private final String text3 = "This is a message for testing forwarding and filtering.";
+	private final String topic4 = "letter without attachments";
+	private final String text4 = "This is a message for testing forwarding and filtering. No attachments.";
+	private final String attachment = "C:\\data\\test.txt";
+	
 	
 	private WebDriver driver;
 	private EventFiringWebDriver e_driver;
@@ -88,13 +94,18 @@ public class GMailTests {
 		//step.logOutUser();
 		
 		//Turn on forwarding
-		step.goToInboxForUser(LOGIN_2, PASSWORD_2);
+		//step.goToInboxForUser(LOGIN_2, PASSWORD_2);
 		
-		step.turnOnForwartingforUser(LOGIN_3);
+		//step.turnOnForwartingforUser(LOGIN_3);
 		
 		//step.setupFilter(LOGIN_1);
 		
-		step.logOutUser();
+		//step.logOutUser();
+		
+		step.sendLetterWithAttachFromUser1ToUser2(LOGIN_1, PASSWORD_1, LOGIN_2, topic3, text3, attachment);
+		
+		//step.sendLetterFromUser1ToUser2(LOGIN_1, PASSWORD_1, LOGIN_2, topic4, text4);
+		
 		
 	}
 	
@@ -107,5 +118,11 @@ public class GMailTests {
 		
 		driver.close();
 		step = null;
+	}
+	
+	public WebDriver getDriver(){
+		
+		return driver;
+		
 	}
 }

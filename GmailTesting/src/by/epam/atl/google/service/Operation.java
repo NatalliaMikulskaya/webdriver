@@ -9,6 +9,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 
 import by.epam.atl.google.exception.PageException;
+import by.epam.atl.google.loggin.ScreenshotMaker;
 import by.epam.atl.google.webpages.AccountInformationPage;
 import by.epam.atl.google.webpages.ConfirmPage;
 import by.epam.atl.google.webpages.FilterPage;
@@ -152,6 +153,16 @@ public class Operation {
 		
 		NewMessagePage newMessagePage = new NewMessagePage(driver);
 		newMessagePage.writeNewMessageAndSend(forWhom, messageTopic, messageText);
+	
+	}
+	
+	public void writeNewMessageWithAttachmentAndSend (String forWhom, 
+													String messageTopic, 
+													String messageText,
+													String fileForAttachment){
+		
+		NewMessagePage newMessagePage = new NewMessagePage(driver);
+		newMessagePage.writeNewMessageWithAttachmentAndSend(forWhom, messageTopic, messageText, fileForAttachment);
 	
 	}
 	
@@ -302,10 +313,13 @@ public class Operation {
 		
 		SettingsPage settingPage = new SettingsPage(driver);
 		
+		ScreenshotMaker.makeScreenShot(driver);
+		
 		settingPage.clickForwardingTab();
 		settingPage = new SettingsPage(driver);
 		
 		settingPage.turnOnForwarding(userForWhomForward);
+		ScreenshotMaker.makeScreenShot(driver);
 		
 		settingPage.clickButtonSaveChanges();
 	}
@@ -315,22 +329,24 @@ public class Operation {
 		SettingsPage settingPage = new SettingsPage(driver);
 		
 		settingPage.clickFilterTab();
-		
+
 		settingPage.clickLinkCreateNewFilter();
 		
 		FilterPage filterPage = new FilterPage(driver);
 		
 		filterPage.fillFieldFrom(userFrom);
-		
+	
 		filterPage.markCheckBoxHasAttachment();
 		
 		filterPage.clickLinkCreateFilter();
 	
-		//open new page, becuse page was changed
+		//open new page, because page was changed
 		filterPage = new FilterPage(driver);
 		
 		filterPage.markCheckBoxDeleteIt();
+		
 		filterPage.markCheckBoxAlwaysMarkAsImportant();
+		
 		filterPage.clickButtonCreateFilter();
 		
 	}

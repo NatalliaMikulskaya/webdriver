@@ -18,13 +18,13 @@ public class FilterPage extends Page {
 	@FindBy (xpath = "//body/div[27]/div/div[2]/div[9]/div[2]")
 	private WebElement linkCreateFilterWithThisSearch;
 	
-	@FindBy (xpath = "//body/div[21]/div/div[2]/div[4]/div/div[6]/input")
+	@FindBy (xpath = "//body/div[18]/div/div[2]/div[4]/div/div[6]/input")
 	private WebElement checkBoxDeleteIt;
 	
-	@FindBy (xpath = "//body/div[21]/div/div[2]/div[4]/div/div[8]/input")
+	@FindBy (xpath = "//body/div[18]/div/div[2]/div[4]/div/div[8]/input")
 	private WebElement checkBoxAlwaysMarkAsImportant;
 	
-	@FindBy (xpath = "//body/div[21]/div/div[2]/div[5]/div")
+	@FindBy (xpath = "//body/div[18]/div/div[2]/div[5]/div")
 	private WebElement buttonCreateFilter;
 	
 		

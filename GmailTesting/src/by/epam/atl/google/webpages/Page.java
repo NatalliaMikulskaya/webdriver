@@ -1,6 +1,14 @@
 package by.epam.atl.google.webpages;
 
+import java.io.File;
+import java.io.IOException;
+import java.util.Calendar;
+import java.util.Date;
+
+import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
@@ -50,13 +58,15 @@ public abstract class Page {
 	}
 	
 	public void highlight(WebDriver driver,WebElement element){
-		  //Creating JavaScriptExecuter Interface
-		   JavascriptExecutor js = (JavascriptExecutor)driver;
-		   for (int iCnt = 0; iCnt < 3; iCnt++) {
-		      //Execute javascript
-		         js.executeScript("arguments[0].style.backgroundColor='red'", element);
-		        // wait.withTimeout(3, TimeUnit.SECONDS);
-		         //js.executeScript("arguments[0].style.backgroundColor='initial'", element);
-		   }
-		 }
+		//Creating JavaScriptExecuter Interface
+		JavascriptExecutor js = (JavascriptExecutor)driver;
+		for (int iCnt = 0; iCnt < 3; iCnt++) {
+			//Execute javascript
+			js.executeScript("arguments[0].style.backgroundColor='red'", element);
+			// wait.withTimeout(3, TimeUnit.SECONDS);
+			//js.executeScript("arguments[0].style.backgroundColor='initial'", element);
+		}
+	}
+	
+	
 }

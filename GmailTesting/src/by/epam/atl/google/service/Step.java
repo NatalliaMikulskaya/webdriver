@@ -71,7 +71,7 @@ public class Step {
 		driver.manage().deleteAllCookies();
 	}
 	
-	public void sendLetterFromUser1ToUser2(String userLogin, String userPassword, String forHwom, String messageTopic, String messageText) throws InterruptedException{
+	public void sendLetterFromUser1ToUser2(String userLogin, String userPassword, String forHwom, String messageTopic, String messageText) {
 	
 		if (loginByUser(userLogin, userPassword)){
 
@@ -82,6 +82,28 @@ public class Step {
 			operation.clickButtonForNewMessage();
 
 			operation.writeNewMessageAndSend(forHwom, messageTopic, messageText);
+
+			//log out
+			operation.logOutFromInbox();
+		}
+	}
+	
+	public void sendLetterWithAttachFromUser1ToUser2(String userLogin, 
+													String userPassword, 
+													String forHwom, 
+													String messageTopic, 
+													String messageText,
+													String fileForAttachment) {
+		
+		if (loginByUser(userLogin, userPassword)){
+
+			//go to gmail
+			operation.clickGmailLink();
+
+			//write and send message
+			operation.clickButtonForNewMessage();
+
+			operation.writeNewMessageWithAttachmentAndSend(forHwom, messageTopic, messageText, fileForAttachment);
 
 			//log out
 			operation.logOutFromInbox();
@@ -147,7 +169,6 @@ public class Step {
 		} else {
 			System.out.println("Ooops... Message was not fouded.");
 		}
-
 	}
 	
 	public void turnOnForwartingforUser(String userToWhomForward){
@@ -159,9 +180,9 @@ public class Step {
 	
 	public void setupFilter(String userFrom){
 		
+		operation.clickSettings();
+		
 		operation.setupFilter(userFrom);
-		
-		
-		
+	
 	}
 }
