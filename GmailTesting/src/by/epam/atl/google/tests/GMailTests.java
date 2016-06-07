@@ -102,9 +102,18 @@ public class GMailTests {
 		
 		//step.logOutUser();
 		
-		step.sendLetterWithAttachFromUser1ToUser2(LOGIN_1, PASSWORD_1, LOGIN_2, topic3, text3, attachment);
+		//step.sendLetterWithAttachFromUser1ToUser2(LOGIN_1, PASSWORD_1, LOGIN_2, topic3, text3, attachment);
 		
 		//step.sendLetterFromUser1ToUser2(LOGIN_1, PASSWORD_1, LOGIN_2, topic4, text4);
+		
+		step.goToTrashFolderForUser(LOGIN_2, PASSWORD_2);
+		
+		boolean isMessageWithAttachFromUser1InTrashAndImportant = 
+				step.isMessageWithAttachFromSenderWithTopicInTrashFolderAndImportant(LOGIN_1, topic3);
+		
+		//message with attachment from user1 should be in trash and marked as important
+		Assert.assertTrue(isMessageWithAttachFromUser1InTrashAndImportant);
+		
 		
 		
 	}

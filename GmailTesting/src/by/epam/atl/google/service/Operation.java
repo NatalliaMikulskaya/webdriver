@@ -24,6 +24,7 @@ import by.epam.atl.google.webpages.PageWithPassword;
 import by.epam.atl.google.webpages.SettingsPage;
 import by.epam.atl.google.webpages.SpamFolderPage;
 import by.epam.atl.google.webpages.SwitchAccountPage;
+import by.epam.atl.google.webpages.TrashFolderPage;
 
 public class Operation {
 
@@ -185,7 +186,7 @@ public class Operation {
 		
 		InboxMailPage inboxPage = new InboxMailPage(driver);
 		
-		inboxPage.markMessage(fromUser, messageTopic);
+		inboxPage.markMessage(driver, fromUser, messageTopic);
 		
 		inboxPage.clickSpamButton();
 		
@@ -195,7 +196,7 @@ public class Operation {
 		
 		InboxMailPage inboxPage = new InboxMailPage(driver);
 		
-		return inboxPage.isLetterReceivedWithPartialTopicAndInInbox(driver, fromUser, messageTopic);
+		return inboxPage.isLetterReceivedWithPartialTopicAndInFolder(driver, fromUser, messageTopic);
 		
 	}
 	
@@ -214,7 +215,7 @@ public class Operation {
 	}
 	
 	
-	public void openSpamFolder() throws InterruptedException{
+	public void openSpamFolder() {
 		
 		InboxMailPage inboxPage = new InboxMailPage(driver);
 		
@@ -226,18 +227,38 @@ public class Operation {
 		
 	}
 	
+	public void openTrashFolder() {
+		
+		InboxMailPage inboxPage = new InboxMailPage(driver);
+		
+		inboxPage.clickLinkMoreAtFolderBar();
+		
+		inboxPage = new InboxMailPage(driver);
+		
+		inboxPage.clickLinkTrashFolder();
+		
+	}
+	
 	public boolean isMessageFromSenderWithTopicInSpamFolder(String fromHwom, String messageTopic){
 		
 		SpamFolderPage spamPage = new SpamFolderPage(driver);
 		
-		return spamPage.isLetterReceivedAndInInbox(driver, fromHwom, messageTopic);
+		return spamPage.isLetterReceivedAndInFolder(driver, fromHwom, messageTopic);
+	}
+	
+	public boolean isMessageWithAttachFromSenderWithTopicInTrashFolderAndImportant(String fromHwom, String messageTopic){
+	
+		TrashFolderPage trashPage = new TrashFolderPage(driver);
+		
+		return trashPage.isLetterWithAttachmentMarkAsImportandAndInFolder(driver, fromHwom, messageTopic);
+		
 	}
 	
 	public void clickSettings(){
 		
 		InboxMailPage inboxPage = new InboxMailPage(driver);
 		
-		inboxPage.clickmenuSettingsInPopup();
+		inboxPage.clickmenuSettingsInPopup(driver);
 	}
 	
 	public void setupForwarding(String forwardTo){

@@ -6,6 +6,7 @@ import java.awt.Toolkit;
 import java.awt.datatransfer.StringSelection;
 import java.awt.event.KeyEvent;
 
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -49,7 +50,18 @@ public class NewMessagePage extends Page{
 		topic.sendKeys(messageTopic);
 		text.sendKeys(messageText);
 		
+		highlight(driver, sendButton);
 		sendButton.click();
+		
+		/*//wait for sending message
+		try {
+			(new WebDriverWait(driver, 30)).
+			until(ExpectedConditions.
+					invisibilityOfElementLocated(locator));
+		}
+		catch(InterruptedException e){
+			
+		}*/
 	}
 	
 	public void writeNewMessageWithAttachmentAndSend(String forWhom, 
@@ -61,33 +73,47 @@ public class NewMessagePage extends Page{
 		topic.sendKeys(messageTopic);
 		text.sendKeys(messageText);
 		
-		attachFile(fileForAttachment);
+		try{
+			attachFile(fileForAttachment);
+		}
+		catch(InterruptedException e){
+			
+		}
 		
 		(new WebDriverWait(driver, 30)).
 		until(ExpectedConditions.
 				invisibilityOfElementLocated(By.xpath("//*[@role='progressbar']")));
 		
 		highlight(driver, sendButton);
-		//sendButton.click();
-		Actions act = new Actions(driver);
+		sendButton.click();
+		/*Actions act = new Actions(driver);
 		
-		act.click(sendButton).build().perform();
+		act.click(sendButton).build().perform();*/
 		
-		try {
+		/*try {
 			(new WebDriverWait(driver, 30)).wait();
 		}
 		catch(InterruptedException e){
 			
-		}
+		}*/
 		//until(ExpectedConditions.
 				//invisibilityOfElementLocated(By.xpath("//*[@role='progressbar']")));
 		
 	}
 
-	private void attachFile(String fileName){
+	private void attachFile(String fileName) throws InterruptedException{
 		
 		highlight(driver, buttonAttachment);
 		buttonAttachment.click();
+		
+		/*Alert alert = driver.switchTo().alert();
+		
+		alert.sendKeys(fileName);
+		
+		alert.accept();
+		*/
+		
+		
 		
 		StringSelection filepath = new StringSelection(fileName);
 
@@ -100,12 +126,15 @@ public class NewMessagePage extends Page{
 			robot.keyPress(KeyEvent.VK_CONTROL);
 
 			robot.keyPress(KeyEvent.VK_V);
-
 			robot.keyRelease(KeyEvent.VK_V);
+			Thread.sleep(2000);
+
 
 			robot.keyRelease(KeyEvent.VK_CONTROL);
 
 			robot.keyPress(KeyEvent.VK_ENTER);
+			
+			Thread.sleep(2000);
 
 			robot.keyRelease(KeyEvent.VK_ENTER);
 

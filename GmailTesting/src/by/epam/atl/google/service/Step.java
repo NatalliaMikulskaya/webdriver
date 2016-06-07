@@ -31,11 +31,19 @@ public class Step {
 		return instance;
 	}
 	
-	public void goToSpamFolderforUser(String userLogin, String userPassword) throws InterruptedException{
+	public void goToSpamFolderforUser(String userLogin, String userPassword) {
 		
 		goToInboxForUser(userLogin, userPassword);
 		
 		operation.openSpamFolder();
+		
+	}
+	
+	public void goToTrashFolderForUser(String userLogin, String userPassword) {
+		
+		goToInboxForUser(userLogin, userPassword);
+		
+		operation.openTrashFolder();
 		
 	}
 	
@@ -131,6 +139,12 @@ public class Step {
 		
 		return operation.isMessageFromSenderWithTopicInSpamFolder(fromHwom, messageTopic);
 
+	}
+	
+	public boolean isMessageWithAttachFromSenderWithTopicInTrashFolderAndImportant(String fromHwom, String messageTopic){
+		
+		return  operation.isMessageWithAttachFromSenderWithTopicInTrashFolderAndImportant(fromHwom, messageTopic);
+		
 	}
 	
 	public void setupForwardingForUser(String forwardToUser){

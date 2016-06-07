@@ -57,6 +57,11 @@ public abstract class Page {
 		return false;
 	}
 	
+	public boolean isTrashBoxPage(){
+		return false;
+	}
+
+	
 	public void highlight(WebDriver driver,WebElement element){
 		//Creating JavaScriptExecuter Interface
 		JavascriptExecutor js = (JavascriptExecutor)driver;
