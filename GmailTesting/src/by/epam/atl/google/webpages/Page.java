@@ -73,5 +73,16 @@ public abstract class Page {
 		}
 	}
 	
+	public void unhighlight(WebDriver driver,WebElement element){
+		//Creating JavaScriptExecuter Interface
+		JavascriptExecutor js = (JavascriptExecutor)driver;
+		for (int iCnt = 0; iCnt < 3; iCnt++) {
+			//Execute javascript
+			js.executeScript("arguments[0].style.backgroundColor='white'", element);
+			// wait.withTimeout(3, TimeUnit.SECONDS);
+			//js.executeScript("arguments[0].style.backgroundColor='initial'", element);
+		}
+	}
+	
 	
 }

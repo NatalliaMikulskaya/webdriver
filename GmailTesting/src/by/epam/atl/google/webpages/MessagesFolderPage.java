@@ -174,18 +174,33 @@ public abstract class MessagesFolderPage extends Page{
 			//look for message
 			WebElement foundedMessage = lookForMessageFromSenderWithTopic(driver, fromUser, messageTopic);
 			
-			markMessage(foundedMessage);
+			markMessage(driver, foundedMessage);
 			
 		}
 	}
 	
-	private void markMessage(WebElement message){
+	public void markMessage(WebDriver driver, WebElement message){
 		
 		//look for checkbox in founded message 
-		WebElement markForMessage = message.findElement(By.xpath("//div[@role='checkbox']"));
+		//WebElement markForMessage = message.findElement(By.xpath("//td[2]/div[@role='checkbox']/div"));
+		//WebElement markForMessage = message.findElement(By.xpath("//td[2]/div/div"));
+		WebElement markForMessage = message.findElement(By.xpath("//div[@role='checkbox']/div"));
+		
+		if (markForMessage != null){
+			unhighlight(driver, message);
+			
+			System.out.println(markForMessage.toString());
+			
+			if (markForMessage.isDisplayed()){
+				highlight(driver, markForMessage);
+			
+				markForMessage.click();
+			}else{
+				System.out.println("Oooops");
+			}
 
-		markForMessage.click();
-
+		}
+		
 	}
 	
 	public void clickLinkMoreAtFolderBar(){
@@ -215,7 +230,7 @@ public abstract class MessagesFolderPage extends Page{
 	
 	private boolean isImportant(WebDriver driver, WebElement message){
 		
-		markMessage(message);
+		markMessage(driver, message);
 		
 		if (isMarkAsUnimportantExist(driver)){
 			
